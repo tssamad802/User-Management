@@ -53,9 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = $controller->insert_record('users', $insertData);
 
         if ($result) {
-            $_SESSION['success'] = 'User added successfully';
-            header("Location: ../user-listing");
-            exit;
+            //$_SESSION['success'] = 'User added successfully';
+            print_r($result);
+            //header("Location: ./add");
+            // exit;
+            // echo '<pre>';
+            // print_r($result);
+            // echo '</pre>';
         } else {
             $_SESSION['errors_add'] = ['Failed to add user - Insert returned false'];
             header('Location: ../user-listing');

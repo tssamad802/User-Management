@@ -76,8 +76,11 @@ class model
                 $stmt->bindValue(":$column", $value);
             }
         }
-
-        return $stmt->execute();
+        $result = $stmt->execute();
+        return json_encode([
+            'success' => $result,
+            'data' => $data
+        ]);
     }
 
     /**
@@ -118,7 +121,7 @@ class model
      * @param int $id
      * @return bool
      */
-    public function update($table, $data = [], $id)
+    public function update($table, $id, $data = [])
     {
         if (isset($data['pwd']) && !empty($data['pwd'])) {
             $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
@@ -140,7 +143,12 @@ class model
         }
         $stmt->bindValue(':id', $id);
 
-        return $stmt->execute();
+        // return $stmt->execute();
+        $result = $stmt->execute();
+        return json_encode([
+            'success' => $result,
+            'data' => $data
+        ]);
     }
 
     /**

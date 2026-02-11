@@ -21,16 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($controller->is_empty_inputs([$id, $name, $email, $role, $position])) {
         $errors[] = 'Please fill in all required fields';
     }
-    
-   if ($controller->is_only_char([$name])) {
+
+    if ($controller->is_only_char([$name])) {
         $errors[] = 'Name must contain only letters and spaces';
     }
-    
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'Please enter a valid email address';
     }
-    
-   if (!empty($email)) {
+
+    if (!empty($email)) {
         $existingUsers = $controller->check_record('users', ['email' => $email]);
         foreach ($existingUsers as $user) {
             if ($user['id'] != $id) {
@@ -58,10 +58,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $updateData['pwd'] = $pwd;
     }
 
-    if ($controller->update('users', $updateData, $id)) {
-        $_SESSION['success'] = 'User updated successfully';
-        header("Location: ../user-listing");
-        exit;
+    if ($controller->update('users', $id, $updateData)) {
+        // $_SESSION['success'] = 'User updated successfully';
+        $result = $controller->update('users', $id, $updateData);
+        // print_r($result);
+        // header("Location: ../user-listing");
+        // exit;
+        echo '<pre>';
+        print_r($result);
+        echo '</pre>';  
     } else {
         $_SESSION['errors_edit'] = ['Failed to update user'];
         header('Location: ../user-listing');

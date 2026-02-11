@@ -139,7 +139,7 @@ $deletedUsers = $controller->fetch_deleted_records('users');
                 </div>
 
                 <div class="modal-body">
-                    <form action="./includes/add.inc.php" method="POST">
+                    <form action="./add" method="POST">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Name <span class="text-danger">*</span></label>
@@ -210,7 +210,7 @@ $deletedUsers = $controller->fetch_deleted_records('users');
                 </div>
 
                 <div class="modal-body">
-                    <form action="./includes/edit.inc.php" method="POST">
+                    <form action="./edit" method="POST">
                         <input type="hidden" name="id">
 
                         <div class="row g-3">
